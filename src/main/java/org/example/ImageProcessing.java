@@ -13,8 +13,9 @@ public class ImageProcessing {
         int[][] imageData = imgToTwoD("src/main/resources/images/apple.jpg");
 
         //twoDToImage((negativeColor(imageData)), "src/main/resources/images/negative_apple.jpg");
-        twoDToImage(stretchHorizontally(imageData), "src/main/resources/images/stretched_apple.jpg");
+        //twoDToImage(stretchHorizontally(imageData), "src/main/resources/images/stretched_apple.jpg");
         //twoDToImage(shrinkVertically(imageData), "src/main/resources/images/shrinked_apple.jpg");
+        twoDToImage(invertImage(imageData), "src/main/resources/images/inverted_apple.jpg");
         // Or load your own image using a URL!
         //int[][] imageData = imgToTwoD("https://content.codecademy.com/projects/project_thumbnails/phaser/bug-dodger.png");
 //        viewImageData(imageData);
@@ -84,8 +85,13 @@ public class ImageProcessing {
 
     public static int[][] invertImage(int[][] imageTwoD) {
         // TODO: Fill in the code for this method
-
-        return null;
+        int[][] invertedImage = new int[imageTwoD.length][imageTwoD[0].length];
+        for (int i = 0; i < imageTwoD.length; i++) {
+            for (int j = 0; j < imageTwoD[0].length; j++) {
+                invertedImage[i][j] = imageTwoD[(imageTwoD.length - 1) - i][(imageTwoD[i].length - 1) - j];
+            }
+        }
+        return invertedImage;
     }
 
     public static int[][] colorFilter(int[][] imageTwoD, int redChangeValue, int greenChangeValue, int blueChangeValue) {
