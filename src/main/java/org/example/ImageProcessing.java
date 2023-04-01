@@ -12,8 +12,9 @@ public class ImageProcessing {
         // The provided images are apple.jpg, flower.jpg, and kitten.jpg
         int[][] imageData = imgToTwoD("src/main/resources/images/apple.jpg");
 
-        twoDToImage((negativeColor(imageData)), "src/main/resources/images/negative_apple.jpg");
+        //twoDToImage((negativeColor(imageData)), "src/main/resources/images/negative_apple.jpg");
         twoDToImage(stretchHorizontally(imageData), "src/main/resources/images/stretched_apple.jpg");
+        //twoDToImage(shrinkVertically(imageData), "src/main/resources/images/shrinked_apple.jpg");
         // Or load your own image using a URL!
         //int[][] imageData = imgToTwoD("https://content.codecademy.com/projects/project_thumbnails/phaser/bug-dodger.png");
 //        viewImageData(imageData);
@@ -72,11 +73,18 @@ public class ImageProcessing {
 
     public static int[][] shrinkVertically(int[][] imageTwoD) {
         // TODO: Fill in the code for this method
-        return null;
+        int[][] modifiedImage = new int[imageTwoD.length / 2][imageTwoD[0].length];
+        for (int i = 0; i < imageTwoD[0].length; i++) {
+            for (int j = 0; j < imageTwoD.length - 1; j += 2) {
+                modifiedImage[j / 2][i] = imageTwoD[j][i];
+            }
+        }
+        return modifiedImage;
     }
 
     public static int[][] invertImage(int[][] imageTwoD) {
         // TODO: Fill in the code for this method
+
         return null;
     }
 
