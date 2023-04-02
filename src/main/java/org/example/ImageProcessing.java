@@ -11,11 +11,11 @@ public class ImageProcessing {
     public static void main(String[] args) {
         // The provided images are apple.jpg, flower.jpg, and kitten.jpg
         int[][] imageData = imgToTwoD("src/main/resources/images/apple.jpg");
-
+        twoDToImage(colorFilter(imageData, 10, -75, 30), "src/main/resources/images/filtered_apple.jpg");
         //twoDToImage((negativeColor(imageData)), "src/main/resources/images/negative_apple.jpg");
         //twoDToImage(stretchHorizontally(imageData), "src/main/resources/images/stretched_apple.jpg");
         //twoDToImage(shrinkVertically(imageData), "src/main/resources/images/shrinked_apple.jpg");
-        twoDToImage(invertImage(imageData), "src/main/resources/images/inverted_apple.jpg");
+        //twoDToImage(invertImage(imageData), "src/main/resources/images/inverted_apple.jpg");
         // Or load your own image using a URL!
         //int[][] imageData = imgToTwoD("https://content.codecademy.com/projects/project_thumbnails/phaser/bug-dodger.png");
 //        viewImageData(imageData);
@@ -96,7 +96,26 @@ public class ImageProcessing {
 
     public static int[][] colorFilter(int[][] imageTwoD, int redChangeValue, int greenChangeValue, int blueChangeValue) {
         // TODO: Fill in the code for this method
-        return null;
+        int[][] new2DArray = new int[imageTwoD.length][imageTwoD[0].length];
+        for (int i = 0; i < imageTwoD.length; i++) {
+            for (int j = 0; j < imageTwoD[0].length; j++) {
+                int[] rgba = getRGBAFromPixel(imageTwoD[i][j]);
+                int newRed = rgba[0] + redChangeValue;
+                int newGreen = rgba[1] + greenChangeValue;
+                int newBlue = rgba[2] + blueChangeValue;
+                if (newRed < 0) newRed = 0;
+                if (newRed > 255) newRed = 255;
+                if (newGreen < 0) newGreen = 0;
+                if (newGreen > 255) newGreen = 255;
+                if (newBlue < 0) newBlue = 0;
+                if (newBlue > 255) newBlue = 255;
+                rgba[0] = newRed;
+                rgba[1] = newGreen;
+                rgba[2] = newBlue;
+                new2DArray[i][j] = getColorIntValFromRGBA(rgba);
+            }
+        }
+        return new2DArray;
     }
 
     // Painting Methods
