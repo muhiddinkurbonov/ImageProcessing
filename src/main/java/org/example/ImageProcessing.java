@@ -1,11 +1,12 @@
 package org.example;
 
-import java.awt.Color;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
-import javax.imageio.ImageIO;
+import java.util.Random;
 
 public class ImageProcessing {
     public static void main(String[] args) {
@@ -23,7 +24,15 @@ public class ImageProcessing {
 //        twoDToImage(trimmed, "src/main/resources/images/trimmed_apple.jpg");
         // int[][] allFilters = stretchHorizontally(shrinkVertically(colorFilter(negativeColor(trimBorders(invertImage(imageData), 50)), 200, 20, 40)));
         // Painting with pixels
+
+        int[][] blankImg = new int[500][500];
+
+        int[][] randomImg = paintRandomImage(blankImg);
+
+        twoDToImage(randomImg, "src/main/resources/images/random_img.jpg");
+
     }
+
 
     // Image Processing Methods
     public static int[][] trimBorders(int[][] imageTwoD, int pixelCount) {
@@ -121,7 +130,18 @@ public class ImageProcessing {
     // Painting Methods
     public static int[][] paintRandomImage(int[][] canvas) {
         // TODO: Fill in the code for this method
-        return null;
+        Random rand = new Random();
+        int[] arr = new int[4];
+        for (int i = 0; i < canvas.length; i++) {
+            for (int j = 0; j < canvas[0].length; j++) {
+                int randRed = rand.nextInt(256);
+                int randGreen = rand.nextInt(256);
+                int randBlue = rand.nextInt(256);
+                arr = new int[]{randRed, randGreen, randBlue, 255};
+                canvas[i][j] = getColorIntValFromRGBA(arr);
+            }
+        }
+        return canvas;
     }
 
     public static int[][] paintRectangle(int[][] canvas, int width, int height, int rowPosition, int colPosition, int color) {
